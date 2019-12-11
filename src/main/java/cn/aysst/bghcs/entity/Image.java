@@ -7,7 +7,7 @@ package cn.aysst.bghcs.entity;
  */
 public class Image {
     private int imageId;
-    private String imageAddr;
+    private String imageUrl;
     private String imageName;
 
     public void setImageId(int imageId) {
@@ -17,11 +17,11 @@ public class Image {
         return imageId;
     }
 
-    public void setImageAddr(String imageAddr) {
-        this.imageAddr = imageAddr;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
-    public String getImageAddr() {
-        return imageAddr;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public void setImageName(String imageName) {
