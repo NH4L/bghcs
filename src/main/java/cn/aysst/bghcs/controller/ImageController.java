@@ -1,9 +1,7 @@
 package cn.aysst.bghcs.controller;
 
 import cn.aysst.bghcs.entity.Image;
-import cn.aysst.bghcs.util.Result;
-import cn.aysst.bghcs.util.ResultCode;
-import cn.aysst.bghcs.util.ResultUtils;
+import cn.aysst.bghcs.util.*;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Objects;
 
+import static cn.aysst.bghcs.util.FileGenertor.genericPath;
 /**
  * @author lcy
  * @version 2019-12-10
@@ -25,40 +25,34 @@ import java.util.Date;
 public class ImageController {
 
     @RequestMapping("/upload")
-    public Result upload(@RequestParam MultipartFile file, HttpServletRequest request) {
-
-        if (file.getSize() > 1024 * 1024 * 10) {
-            System.out.println("文件上传失败");
-            return ResultUtils.fail(ResultCode.FAIL, "文件过大，请上传10M以内的图片");
-        }
+    public Result upload(@RequestParam MultipartFile file, String userOpenId, HttpServletRequest request) {
         String path = request.getContextPath();
-        System.out.println("path:" + path);
         String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
-        System.out.println("basePath:" + basePath);
-        Date dt = new Date();
-        Long time = dt.getTime();
+
         if (file != null) {
-            String realPath = "e://HHU/ThirdYear/images/";// 获取保存的路径，本地磁盘中的一个文件夹
-//            String realPath = "/usr/projects/bghcs/";// 获取保存的路径，本地磁盘中的一个文件夹
+            if (file.getSize() > 1024 * 1024 * 10) {
+                System.out.println("文件上传失败");
+                return ResultUtils.fail(ResultCode.FAIL, "文件过大，请上传10M以内的图片");
+            }
             if (file.isEmpty()) {
-                // 未选择文件
                 return ResultUtils.fail(ResultCode.FAIL, "未选择图片");
             } else {
-                // 文件原名称
-                String originFileName = "";
-                // 上传文件重命名
-                String originalFilename = time.toString().substring(time.toString().length() - 8,
-                        time.toString().length());
-                originalFilename = originalFilename.concat(".");
-                originalFilename = originalFilename.concat(file.getOriginalFilename().toString()
-                        .substring(file.getOriginalFilename().toString().indexOf(".") + 1));
                 try {
-                    File dest = new File(realPath + originalFilename);
-                    System.out.println(realPath+originalFilename);
+                    // 生成文件名
+                    String originalFilename = FileGenertor.generateFilename(file);
+                    //得出两级目录地址: /3/4
+                    String realPath = genericPath(originalFilename, Config.LOCAL_PATH + userOpenId + "/");
+
+                    //磁盘物理地址
+                    String diskFileDir = Config.LOCAL_PATH + userOpenId + "/" + realPath + originalFilename;
+                    //网络访问地址
+                    String networkFileDir = basePath + "/static/images/" + userOpenId + "/"+ realPath + originalFilename;
+
+                    File dest = new File(diskFileDir);
                     file.transferTo(dest);
                     Image image = new Image();
                     image.setImageName(originalFilename);
-                    image.setImageAddr(basePath + "/static/image/" + originalFilename);
+                    image.setImageAddr(networkFileDir);
                     return ResultUtils.success(image);
 
                 } catch (IOException e) {
