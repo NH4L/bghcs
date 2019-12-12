@@ -83,4 +83,10 @@ public class ImageController {
 
     }
 
+    @RequestMapping("/get")
+    @ResponseBody
+    public Result getUserImage(@RequestParam String userOpenId) {
+        List<Image> imageList = imageService.getUserImage(userOpenId);
+        return ResultUtils.success(imageList);
+    }
 }
