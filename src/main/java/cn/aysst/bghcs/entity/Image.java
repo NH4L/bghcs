@@ -1,5 +1,8 @@
 package cn.aysst.bghcs.entity;
 
+import java.sql.Time;
+import java.util.Date;
+
 /**
  * @author lcy
  * @version 2019-12-9
@@ -9,6 +12,7 @@ public class Image {
     private int imageId;
     private String imageUrl;
     private String imageName;
+    private String imageUploadTime;
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
@@ -30,4 +34,12 @@ public class Image {
     public String getImageName() {
         return imageName;
     }
+
+    public void setImageUploadTime(String imageUploadTime) {
+        this.imageUploadTime = imageUploadTime;
+    }
+    public String getImageUploadTime() {
+        return imageUploadTime;
+    }
+
 }
