@@ -22,4 +22,9 @@ public class ImageServiceImpl implements ImageService {
     public String insertImage(List<Image> list, String userOpenId) {
         return imageDao.insertImage(list, userOpenId);
     }
+
+    @Override
+    public List<Image> getUserImage(String userOpenId) {
+        return imageDao.getUserImage(userOpenId);
+    }
 }
