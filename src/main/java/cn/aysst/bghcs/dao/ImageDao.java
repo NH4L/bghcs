@@ -4,11 +4,15 @@ import cn.aysst.bghcs.entity.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +49,28 @@ public class ImageDao {
         } else {
             return "fail";
         }
+    }
+
+    public List<Image> getUserImage(String userOpenId) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<Image> imageList = new ArrayList<Image>();
+        String querySql = "SELECT imageId, imageName, imageUrl, imageUploadTime\n" +
+                "FROM pdimage\n" +
+                "WHERE userId=(SELECT userId\n" +
+                "\t\t\t\t\t\t\tFROM user\n" +
+                "\t\t\t\t\t\t\tWHERE userOpenId=?)";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(querySql, userOpenId);
+        while (result.next()) {
+            Image image = new Image();
+            image.setImageId(result.getInt("imageId"));
+            image.setImageName(result.getString("imageName"));
+            image.setImageUrl(result.getString("imageUrl"));
+            image.setImageUploadTime(df.format(result.getTimestamp("imageUploadTime")));
+            imageList.add(image);
+        }
+
+        return imageList;
     }
 
 }
