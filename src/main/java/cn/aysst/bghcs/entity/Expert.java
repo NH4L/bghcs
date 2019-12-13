@@ -2,6 +2,8 @@ package cn.aysst.bghcs.entity;
 
 public class Expert {
     private int expertId;
+    private String expertEmail;
+    private String expertPassword;
     private String expertName;
     private String expertEducation;
     private String expertJobTitle;
@@ -11,6 +13,20 @@ public class Expert {
     }
     public int getExpertId() {
         return expertId;
+    }
+
+    public void setExpertEmail(String expertEmail) {
+        this.expertEmail = expertEmail;
+    }
+    public String getExpertEmail() {
+        return expertEmail;
+    }
+
+    public void setExpertPassword(String expertPassword) {
+        this.expertPassword = expertPassword;
+    }
+    public String getExpertPassword() {
+        return expertPassword;
     }
 
     public void setExpertName(String expertName) {
