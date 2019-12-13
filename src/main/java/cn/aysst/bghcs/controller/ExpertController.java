@@ -21,14 +21,26 @@ public class ExpertController {
     @Autowired
     ExpertService expertService;
 
-    @RequestMapping("/insertexpert")
+    @RequestMapping("/register")
     @ResponseBody
     public Result insertExpert(@RequestBody Expert expert) {
         String isSuccess = expertService.insertExpert(expert);
         if (isSuccess.equals("success"))
             return ResultUtils.success();
+        else if (isSuccess.equals("emailExists"))
+            return ResultUtils.fail(ResultCode.FAIL, "邮箱已被注册, 请更换邮箱");
         else
-            return ResultUtils.fail(ResultCode.FAIL);
+            return ResultUtils.fail(ResultCode.FAIL, "服务器繁忙");
+    }
+
+    @RequestMapping("/login")
+    @ResponseBody
+    public Result login(@RequestParam String expertEmail, String expertPassword) {
+        Expert expert = expertService.login(expertEmail, expertPassword);
+        if (!(expert==null))
+            return ResultUtils.success(expert);
+        else
+            return ResultUtils.fail(ResultCode.FAIL, "用户名或密码错误");
     }
 
 }
