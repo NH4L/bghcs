@@ -9,6 +9,7 @@ public class Disease {
     private int diseaseId;
     private String diseaseName;
     private String diseaseSolution;
+    private String diseaseType;//两种类型(病害，虫害)
 
     public void setDiseaseId(int diseaseId) {
         this.diseaseId = diseaseId;
@@ -29,5 +30,12 @@ public class Disease {
     }
     public String getDiseaseSolution() {
         return diseaseSolution;
+    }
+
+    public void setDiseaseType(String diseaseType) {
+        this.diseaseType = diseaseType;
+    }
+    public String getDiseaseType() {
+        return diseaseType;
     }
 }
