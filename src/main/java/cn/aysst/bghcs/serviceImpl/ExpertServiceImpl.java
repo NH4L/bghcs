@@ -20,4 +20,9 @@ public class ExpertServiceImpl implements ExpertService {
     public String insertExpert(Expert expert) {
         return expertDao.insertExpert(expert);
     }
+
+    @Override
+    public Expert login(String expertEmail, String expertPassword) {
+        return expertDao.login(expertEmail, expertPassword);
+    }
 }
