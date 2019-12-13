@@ -13,4 +13,5 @@ public interface ExpertService {
 
     String insertExpert(Expert expert);
 
+    Expert login(String expertEmail, String expertPassword);
 }
