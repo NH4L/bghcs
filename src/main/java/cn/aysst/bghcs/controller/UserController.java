@@ -20,6 +20,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    /**
+     * 插入用户信息
+     * @param user 用户实体
+     * @return
+     */
     @RequestMapping("/insertuser")
     @ResponseBody
     public Result insertUser(@RequestBody  User user) {
@@ -30,6 +35,11 @@ public class UserController {
             return ResultUtils.fail(ResultCode.FAIL);
     }
 
+    /**
+     * 检查用户是否为新用户
+     * @param userOpenId
+     * @return
+     */
     @RequestMapping("/checkuser")
     @ResponseBody
     public Result checkOpenId(@RequestParam String userOpenId) {
