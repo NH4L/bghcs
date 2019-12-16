@@ -11,10 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static cn.aysst.bghcs.util.FileGenertor.genericPath;
 /**
@@ -28,6 +25,13 @@ public class ImageController {
     @Autowired
     ImageService imageService;
 
+    /**
+     * 微信用户上传图片
+     * @param files 图片数组
+     * @param userOpenId 用户userOpenId
+     * @param request
+     * @return
+     */
     @RequestMapping("/upload")
     @ResponseBody
     public Result upload(@RequestParam MultipartFile[] files, String userOpenId, HttpServletRequest request) {
@@ -83,10 +87,32 @@ public class ImageController {
 
     }
 
+    /**
+     * 根据userOpenId获取用户所上传的图片
+     * @param userOpenId
+     * @return 图片列表
+     */
     @RequestMapping("/get")
     @ResponseBody
     public Result getUserImage(@RequestParam String userOpenId) {
         List<Image> imageList = imageService.getUserImage(userOpenId);
         return ResultUtils.success(imageList);
     }
+
+    /**
+     * 获取图片一共多少张，方便后续进行分页
+     * @return
+     */
+    @RequestMapping("/getimagenum")
+    @ResponseBody
+    public Result getImageNum() {
+        int imageNum = imageService.getImageNum();
+        if (imageNum > -1) {
+            Map<String, Integer> map = new HashMap<String, Integer>();
+            map.put("imageNum", imageNum);
+            return ResultUtils.success(map);
+        } else
+            return ResultUtils.fail(ResultCode.FAIL, "fail");
+    }
+
 }
