@@ -73,4 +73,15 @@ public class ImageDao {
         return imageList;
     }
 
+    public int getImageNum() {
+        String querySql = "SELECT COUNT(*) AS imageNum\n" +
+                          "FROM review";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(querySql);
+        int imageNum = -1;
+        while (result.next()) {
+            imageNum = result.getInt("imageNum");
+        }
+        return imageNum;
+    }
 }
