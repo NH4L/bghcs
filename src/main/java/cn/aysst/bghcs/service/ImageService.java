@@ -15,4 +15,6 @@ public interface ImageService {
     String insertImage(List<Image> list, String userOpenId);
 
     List<Image> getUserImage(String userOpenId);
+
+    int getImageNum();
 }
