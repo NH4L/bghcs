@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>信息统计</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/colors/default.css" id="theme" rel="stylesheet">
+</head>
+
+<body class="fix-header card-no-border fix-sidebar">
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/bghcs/index">
+                        <b>
+                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <span>
+                            <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo text -->    
+                            <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                         </span> </a>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown u-pro">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="/bghcs/profile"><img src="assets/images/users/1.jpg" alt="user" class="" /> <span class="hidden-md-down" id="indexExpertName">xxx &nbsp;</span> </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/index" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">检测图片</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/profile" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">个人信息</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark active" href="/bghcs/table" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">统计</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/link" aria-expanded="false"><i class="fa fa-link"></i><span class="hide-menu">友情链接</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/contactus" aria-expanded="false"><i class="fa fa-address-card"></i><span class="hide-menu">联系我们</span></a>
+                        </li>
+                         
+                    </ul>
+                    <div class="text-center m-t-30">
+                        <button id="logout" class="btn waves-effect waves-light btn-info hidden-md-down" onclick="expertLogout()">退出登录</button>
+                    </div>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h3 class="text-themecolor">统计信息</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/bgcs/index">主页</a></li>
+                            <li class="breadcrumb-item active">统计信息</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Statistics">
+                <h6 class="text-themecolor">检测农作物数统计</h6>
+                <div id="cropStatistics" style="width:500px;height:500px;"></div>
+                <h6 class="text-themecolor">检测病虫害数统计</h6>
+                <div id="diseaseStatistics" style="width:500px;height:500px;"></div>
+                <h6 class="text-themecolor">检测病虫害数统计</h6>
+                <div id="treeStatistics" style="width:500px;height:800px;"></div>
+            </div>
+            <footer class="footer"> © copyright www.aysst.cn 2019
+                <p><a href="http://www.aysst.cn/" target="_blank" title="lcy">1762810130_李朝宇</a></p>
+                <p>蜀ICP备19003562号-1</p>
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="assets/node_modules/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/node_modules/bootstrap/js/popper.min.js"></script>
+    <script src="assets/node_modules/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <!-- jQuery peity -->
+    <script src="assets/node_modules/peity/jquery.peity.min.js"></script>
+    <script src="assets/node_modules/peity/jquery.peity.init.js"></script>
+    <script src="js/expertCheck.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script type="text/javascript">
+        var app_crop = echarts.init(document.getElementById('cropStatistics'));
+        app_crop.title = '检测农作物数统计';
+        var app_disease = echarts.init(document.getElementById('diseaseStatistics'));
+        app_disease.title = '检测病虫害数统计';
+        var app_tree = echarts.init(document.getElementById('treeStatistics'));
+        app_tree.title = '农作物病虫害结构树';
+
+        $(function () {
+            if (expertStorage["expertEmail"] == null) {
+                window.location.href = home + '/login';
+            }
+            $('#indexExpertName').html(expertStorage["expertName"]);
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: home + "/expert/statistics",
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                data: "expertEmail=" + expertStorage["expertEmail"],
+                success: function (data) {
+                    var cropList = data['cropList'];
+                    var diseaseList = data['diseaseList'];
+                    var cropTree = data['treeMap'];
+                    var cropNameList = [];
+                    var diseaseNameList = [];
+                    for (var i=0; i<cropList.length; i++) {
+                        cropNameList.push(cropList[i]['name']);
+                    }
+                    for (var i=0; i<diseaseList.length; i++) {
+                        diseaseNameList.push(diseaseList[i]['name']);
+                    }
+
+                    console.log(cropList, diseaseList);
+                    console.log(cropNameList, diseaseNameList);
+                    crop_option = {
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            x: 'left',
+                            data: cropNameList
+                        },
+                        series: [
+                            {
+                                name:'农作物检测数',
+                                type:'pie',
+                                radius: ['50%', '70%'],
+                                avoidLabelOverlap: false,
+                                label: {
+                                    normal: {
+                                        show: false,
+                                        position: 'center'
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '30',
+                                            fontWeight: 'bold'
+                                        }
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                data: cropList
+                            }
+                        ]
+                    };
+                    app_crop.setOption(crop_option);
+
+                    disease_option = {
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            x: 'left',
+                            data: diseaseNameList
+                        },
+                        series: [
+                            {
+                                name:'病虫害检测数',
+                                type:'pie',
+                                radius: ['50%', '70%'],
+                                avoidLabelOverlap: false,
+                                label: {
+                                    normal: {
+                                        show: false,
+                                        position: 'center'
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '30',
+                                            fontWeight: 'bold'
+                                        }
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                data: diseaseList
+                            }
+                        ]
+                    };
+                    app_disease.setOption(disease_option);
+
+                    tree_option = {
+                        tooltip: {
+                            trigger: 'item',
+                            triggerOn: 'mousemove'
+                        },
+                        legend: {
+                            top: '2%',
+                            left: '3%',
+                            orient: 'vertical',
+                            data: [{
+                                name: '农作物病虫害树',
+                                icon: 'rectangle'
+                            } ,
+                                {
+                                    name: 'tree2',
+                                    icon: 'rectangle'
+                                }],
+                            borderColor: '#c23531'
+                        },
+                        series:[
+                            {
+                                type: 'tree',
+                                name: '农作物病虫害树',
+                                data: [cropTree],
+                                top: '5%',
+                                left: '7%',
+                                bottom: '2%',
+                                right: '60%',
+                                symbolSize: 7,
+                                label: {
+                                    normal: {
+                                        position: 'left',
+                                        verticalAlign: 'middle',
+                                        align: 'right'
+                                    }
+                                },
+                                leaves: {
+                                    label: {
+                                        normal: {
+                                            position: 'right',
+                                            verticalAlign: 'middle',
+                                            align: 'left'
+                                        }
+                                    }
+                                },
+                                expandAndCollapse: true,
+                                animationDuration: 550,
+                                animationDurationUpdate: 750
+
+                            }
+                        ]
+                    };
+                    app_tree.setOption(tree_option);
+
+                },
+                error: function () {
+                    alert("访问繁忙，请重试")
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

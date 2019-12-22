@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登录</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link href="assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/orionicons.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+</head>
+<body>
+    <div class="page-holder d-flex align-items-center">
+        <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col-5 col-lg-7 mx-auto mb-5 mb-lg-0">
+                <div class="pr-lg-5"><img src="assets/images/illustration.svg" alt="" class="img-fluid"></div>
+            </div>
+            <div class="col-lg-5 px-lg-4">
+                <h1 class="text-base text-primary text-uppercase mb-4">农作物病虫害检测系统</h1>
+                <h2 class="mb-4">欢迎登录！</h2>
+                <p class="text-muted">本农作物病虫害检测系统适用于农作物病虫害专家</p>
+                <form id="loginForm" class="mt-4" onsubmit="return login();">
+                    <div class="form-group mb-4">
+                        <input type="text" name="input_expertEmail" placeholder="邮箱" class="form-control border-0 shadow form-control-lg" id="input_expertEmail" onblur="return checkExpertEmailLogin();">
+                        <label id="input_expertEmailWarn"> </label>
+                    </div>
+                    <div class="form-group mb-4">
+                        <input type="password" name="input_expertPassword" placeholder="密码" class="form-control border-0 shadow form-control-lg text-violet" id="input_expertPassword" onblur="return checkExpertPasswordLogin();">
+                        <label id="input_expertPasswordWarn"> </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary shadow px-5">登录</button>
+                    <a href="/bghcs/register">
+                        <input type="button" class="btn btn-primary shadow px-5" value="注册">
+                    </a>
+                </form>
+            </div>
+        </div>
+            <p class="mt-5 mb-0 text-gray-400 text-center">© copyright www.aysst.cn 2019&nbsp&nbsp<a href="http://www.aysst.cn/" target="_blank" title="lcy">1762810130_李朝宇</a></p>
+            <p class="mt-5 mb-0 text-gray-400 text-center">蜀ICP备19003562号-1</p>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="assets/node_modules/jquery/jquery.min.js"></script>
+    <script src="assets/node_modules/bootstrap/js/popper.min.js"></script>
+    <script src="assets/node_modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/jquery.cookie.js"> </script>
+    <script src="js/Chart.min.js"></script>
+    <script src="js/js.cookie.min.js"></script>
+    <script src="js/front.js"></script>
+    <script src="js/expertCheck.js"></script>
+</body>
+</html>

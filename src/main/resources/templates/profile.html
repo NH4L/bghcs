@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>个人信息</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/colors/default.css" id="theme" rel="stylesheet">
+</head>
+<body class="fix-header fix-sidebar card-no-border">
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/bghcs/index">
+                        <b>
+                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <span>
+                            <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo text -->    
+                            <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                         </span> </a>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown u-pro">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="/bghcs/profile"><img src="assets/images/users/1.jpg" alt="user" class="" /> <span class="hidden-md-down" id="IndexExpertName">xxx</span> &nbsp; </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/index" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">检测图片</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark active" href="/bghcs/profile" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">个人信息</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/table" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">统计</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/link" aria-expanded="false"><i class="fa fa-link"></i><span class="hide-menu">友情链接</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/contactus" aria-expanded="false"><i class="fa fa-address-card"></i><span class="hide-menu">联系我们</span></a>
+                        </li>
+                    </ul>
+                    <div class="text-center m-t-30">
+                        <button id="logout" class="btn waves-effect waves-light btn-info hidden-md-down" onclick="expertLogout()">退出登录</button>
+                    </div>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h3 class="text-themecolor">个人信息</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/bgcs/index">主页</a></li>
+                            <li class="breadcrumb-item active">个人信息</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <center class="m-t-30"> <img src="assets/images/users/1.jpg" class="img-circle" width="150" />
+                                    <h4 class="card-title m-t-10" id="left_expertName" name="left_expertName">王磊</h4>
+                                    <h6 class="card-subtitle" id="left_expertJobTitle" name="left_expertJobTitle">XX 大学教授</h6>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <div class="card">
+                            <!-- Tab panes -->
+                            <div class="card-body">
+                                <form class="form-horizontal form-material"  id="input_form" onsubmit="return changeInfo();">
+                                    <div class="form-group">
+                                        <label class="col-md-12">邮箱</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="xxx@xx.com" class="form-control form-control-line" id="input_expertEmail" name="input_expertEmail" disabled="true">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">姓名</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="王xx" class="form-control form-control-line" id="input_expertName" name="input_expertName" onblur="return checkExpertName();">
+                                            <label id="input_expertNameWarn"> </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">职称</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="xx大学教授" class="form-control form-control-line" id="input_expertJobTitle" name="input_expertJobTitle" onblur="return checkExpertJobTitle();">
+                                            <label id="input_expertJobTitleWarn"> </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">学历</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="xx大学教授" class="form-control form-control-line" id="input_expertEducation" name="input_expertEducation" onblur="return checkExpertEducation();">
+                                            <label id="input_expertEducationWarn"> </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-success" type="submit">确认修改</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer"> © copyright www.aysst.cn 2019
+                <p><a href="http://www.aysst.cn/" target="_blank" title="lcy">1762810130_李朝宇</a></p>
+                <p>蜀ICP备19003562号-1</p>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/node_modules/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/node_modules/bootstrap/js/popper.min.js"></script>
+    <script src="assets/node_modules/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <script src="js/expertCheck.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (expertStorage["expertEmail"] == null) {
+                window.location.href = home + '/login';
+            }
+            $('#indexExpertName').html(expertStorage["expertName"]);
+            //获取分数记录的条数
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/bghcs/expert/getinfo",
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                data: "expertEmail=" + expertStorage["expertEmail"],
+                success: function (data) {
+                    console.log(data);
+                    var isSuccess = data['msg'];
+                    if (isSuccess == "success") {
+                        var data = data['data'];
+                        console.log(data);
+                        $('#IndexExpertName').html(data['expertName']);
+                        $('#left_expertName').html(data['expertName']);
+                        $('#left_expertJobTitle').html(data['expertJobTitle']);
+                        $('#input_expertEmail').val(data['expertEmail']);
+                        $('#input_expertName').val(data['expertName']);
+                        $('#input_expertJobTitle').val(data['expertJobTitle']);
+                        $('#input_expertEducation').val(data['expertEducation']);
+                    } else {
+                        console.log(data['msg'], "不存在此用户");
+                    }
+                },
+                error: function () {
+                    alert("访问繁忙，请重试")
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

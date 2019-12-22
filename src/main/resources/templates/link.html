@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>友情链接</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/bghcs/index">
+                        <b>
+                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <span>
+                            <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo text -->    
+                            <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                         </span> </a>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown u-pro">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="/bghcs/profile"><img src="assets/images/users/1.jpg" alt="user" class="" /> <span class="hidden-md-down" id="indexExpertName">xxx &nbsp;</span> </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/index" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">检测图片</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/profile" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">个人信息</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/table" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">统计</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark active" href="/bghcs/link" aria-expanded="false"><i class="fa fa-link"></i><span class="hide-menu">友情链接</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="/bghcs/contactus" aria-expanded="false"><i class="fa fa-address-card"></i><span class="hide-menu">联系我们</span></a>
+                        </li>
+                    </ul>
+                    <div class="text-center m-t-30">
+                        <button id="logout" class="btn waves-effect waves-light btn-info hidden-md-down" onclick="expertLogout()">退出登录</button>
+                    </div>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h3 class="text-themecolor">友情链接</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/bgcs/index">主页</a></li>
+                            <li class="breadcrumb-item active">友情链接</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;margin:50px auto;">
+                <h5>智能认知组-农业病虫害研究图库: <a href="http://www.icgroupcas.cn/website_bchtk/index.html" target="_blank" title="lcy">http://www.icgroupcas.cn/website_bchtk/index.html</a></h5>
+                <h5>智慧农资服务平台: <a href="http://pic.114nz.com/" target="_blank" title="lcy">http://pic.114nz.com/</a></h5>
+                <h5>中国科学院合肥物质科学研究院-农作物病虫害研究图库: <a href="http://ai-ia.ac.cn/bchtk/index.html" target="_blank" title="lcy">http://ai-ia.ac.cn/bchtk/index.html</a></h5>
+                <h5>中国科学院数据云: <a href="http://www.csdb.cn/" target="_blank" alt="">http://www.csdb.cn/</a></h5>
+                <h5>农科院农业病虫草害图文数据库: <a href="http://bcch.ahnw.gov.cn/" target="_blank" alt="">http://bcch.ahnw.gov.cn/</a></h5>
+            </div>
+            <footer class="footer"> © copyright www.aysst.cn 2019
+                <p><a href="http://www.aysst.cn/" target="_blank" title="lcy">1762810130_李朝宇</a></p>
+                <p>蜀ICP备19003562号-1</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="assets/node_modules/jquery/jquery.min.js"></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src="assets/node_modules/bootstrap/js/popper.min.js"></script>
+    <script src="assets/node_modules/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <script src="assets/node_modules/raphael/raphael-min.js"></script>
+    <script src="assets/node_modules/morrisjs/morris.min.js"></script>
+    <!--c3 JavaScript -->
+    <script src="assets/node_modules/d3/d3.min.js"></script>
+    <script src="assets/node_modules/c3-master/c3.min.js"></script>
+    <!-- Chart JS -->
+    <script src="js/dashboard1.js"></script>
+    <script src="js/expertCheck.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            if (expertStorage["expertEmail"] == null) {
+                window.location.href = home + '/login';
+            }
+            $('#indexExpertName').html(expertStorage["expertName"]);
+        });
+    </script>
+</body>
+
+</html>
