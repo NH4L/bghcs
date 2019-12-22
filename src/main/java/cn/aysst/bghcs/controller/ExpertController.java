@@ -3,6 +3,7 @@ package cn.aysst.bghcs.controller;
 
 import cn.aysst.bghcs.entity.Expert;
 import cn.aysst.bghcs.entity.Image;
+import cn.aysst.bghcs.entity.Statistics;
 import cn.aysst.bghcs.service.ExpertService;
 import cn.aysst.bghcs.util.Result;
 import cn.aysst.bghcs.util.ResultCode;
@@ -39,9 +40,9 @@ public class ExpertController {
         if (isSuccess.equals("success"))
             return ResultUtils.success();
         else if (isSuccess.equals("emailExists"))
-            return ResultUtils.fail(ResultCode.FAIL, "邮箱已被注册, 请更换邮箱");
+            return ResultUtils.fail(ResultCode.FAIL, "emailExists");
         else
-            return ResultUtils.fail(ResultCode.FAIL, "服务器繁忙");
+            return ResultUtils.fail(ResultCode.FAIL, "fail");
     }
 
     /**
@@ -57,7 +58,37 @@ public class ExpertController {
         if (!(expert==null))
             return ResultUtils.success(expert);
         else
-            return ResultUtils.fail(ResultCode.FAIL, "用户名或密码错误");
+            return ResultUtils.fail(ResultCode.FAIL, "fail");
+    }
+
+    /**
+     * 根据专家邮箱查找专家信息
+     * @param expertEmail   邮箱
+     * @return  专家实体
+     */
+    @RequestMapping("/getinfo")
+    @ResponseBody
+    public Result getExpertInfo(@RequestParam String expertEmail) {
+        Expert expert = expertService.getExpertInfo(expertEmail);
+        if (!(expert==null))
+            return ResultUtils.success(expert);
+        else
+            return ResultUtils.fail(ResultCode.FAIL, "fail");
+    }
+
+    /**
+     * 修改专家信息（注册邮箱不能修改）
+     * @param expert
+     * @return
+     */
+    @RequestMapping("/change")
+    @ResponseBody
+    public Result changeExpertInfo(@RequestBody Expert expert) {
+        String isSuccess = expertService.changeExpertInfo(expert);
+        if (isSuccess.equals("success"))
+            return ResultUtils.success();
+        else
+            return ResultUtils.fail(ResultCode.FAIL, "fail");
     }
 
     /**
@@ -71,9 +102,9 @@ public class ExpertController {
     @RequestMapping("/check")
     @ResponseBody
     public Result check(@RequestParam String expertEmail, String cropName, String diseaseName, String imageUrl) {
-        String isSuccess = expertService.check(expertEmail, cropName, diseaseName, imageUrl);
-        if (isSuccess.equals("success"))
-            return ResultUtils.success();
+        Map result = expertService.check(expertEmail, cropName, diseaseName, imageUrl);
+        if (result != null)
+            return ResultUtils.success(result);
         else
             return ResultUtils.fail(ResultCode.FAIL, "fail");
     }
@@ -107,4 +138,14 @@ public class ExpertController {
         return ResultUtils.success(imageList);
     }
 
+    /**
+     * 实现统计
+     * @return 统计数据
+     */
+    @RequestMapping("/statistics")
+    @ResponseBody
+    public String getStatistics(@RequestParam String expertEmail) {
+        String result = expertService.getStatistics(expertEmail);
+        return result;
+    }
 }
