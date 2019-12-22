@@ -9,6 +9,9 @@ import cn.aysst.bghcs.util.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author lcy
  * @version 2019-12-9
@@ -50,5 +53,14 @@ public class UserController {
             return ResultUtils.fail(ResultCode.FAIL);
     }
 
+    @RequestMapping("/getcheckinfo")
+    @ResponseBody
+    public Result getCheckInfo(@RequestParam String userOpenId, String imageUrl) {
+        List<Map> result = userService.getCheckInfo(userOpenId, imageUrl);
+        if (result != null)
+            return ResultUtils.success(result);
+        else
+            return ResultUtils.fail(ResultCode.FAIL);
+    }
 
 }
