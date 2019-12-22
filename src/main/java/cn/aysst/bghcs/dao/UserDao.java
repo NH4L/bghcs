@@ -1,5 +1,6 @@
 package cn.aysst.bghcs.dao;
 
+import cn.aysst.bghcs.entity.Image;
 import cn.aysst.bghcs.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +11,12 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author lcy
@@ -65,5 +72,34 @@ public class UserDao {
         } else {
             return "fail";
         }
+    }
+
+    public List<Map> getCheckInfo(String userOpenId, String imageUrl) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<Map> resultList = new ArrayList<Map>();
+        String querySql = "SELECT expertName, expertEmail, cropName, diseaseName, diseaseSolution, diseaseType, reviewTime\n" +
+                          "FROM expert, review, crop, disease\n" +
+                          "WHERE expert.expertId=review.expertId AND\n" +
+                          "      review.cropId=crop.cropId AND\n" +
+                          "\t\t\treview.diseaseId=disease.diseaseId AND\n" +
+                          "\t\t\treview.imageId=(SELECT imageId\n" +
+                          "\t\t\t\t\t\t\t\t\t\t\tFROM pdimage\n" +
+                          "\t\t\t\t\t\t\t\t\t\t\tWHERE imageUrl=? AND\n" +
+                          "\t\t\t\t\t\t\t\t\t\t\t\t\t\tuserId=(SELECT userId\n" +
+                          "\t\t\t\t\t\t\t\t\t\t\t\t\t\tFROM user\n" +
+                          "\t\t\t\t\t\t\t\t\t\t\t\t\t\tWHERE userOpenId=?))";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(querySql, imageUrl, userOpenId);
+        while (result.next()) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("expertName", result.getString("expertName"));
+            map.put("expertEmail", result.getString("expertEmail"));
+            map.put("cropName", result.getString("cropName"));
+            map.put("diseaseName", result.getString("diseaseName"));
+            map.put("diseaseSolution", result.getString("diseaseSolution"));
+            map.put("diseaseType", result.getString("diseaseType"));
+            map.put("reviewTime", df.format(result.getTimestamp("reviewTime")));
+            resultList.add(map);
+        }
+        return resultList;
     }
 }
