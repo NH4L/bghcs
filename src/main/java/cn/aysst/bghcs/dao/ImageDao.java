@@ -67,6 +67,19 @@ public class ImageDao {
             image.setImageName(result.getString("imageName"));
             image.setImageUrl(result.getString("imageUrl"));
             image.setImageUploadTime(df.format(result.getTimestamp("imageUploadTime")));
+
+            String queryIsCheckSql = "SELECT *\n" +
+                                     "FROM review\n" +
+                                     "WHERE imageId=(SELECT imageId\n" +
+                                     "\t\t\t\t\t\t\tFROM pdimage\n" +
+                                     "\t\t\t\t\t\t\tWHERE imageUrl=?)";
+
+            SqlRowSet result2 = jdbcTemplate.queryForRowSet(queryIsCheckSql, result.getString("imageUrl"));
+            if (result2.next()) {
+                image.setIsChecked(Image.IMAGE_CHECK);
+            } else {
+                image.setIsChecked(Image.IMAGE_UNCHECK);
+            }
             imageList.add(image);
         }
 
@@ -75,7 +88,7 @@ public class ImageDao {
 
     public int getImageNum() {
         String querySql = "SELECT COUNT(*) AS imageNum\n" +
-                          "FROM review";
+                          "FROM pdimage";
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(querySql);
         int imageNum = -1;
