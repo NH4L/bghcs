@@ -9,10 +9,13 @@ import java.util.Date;
  * 图片实体类
  */
 public class Image {
+    public static final int IMAGE_CHECK = 1;
+    public static final int IMAGE_UNCHECK = -1;
     private int imageId;
     private String imageUrl;
     private String imageName;
     private String imageUploadTime;
+    private int isChecked;
 
     public void setImageId(int imageId) {
         this.imageId = imageId;
@@ -42,4 +45,10 @@ public class Image {
         return imageUploadTime;
     }
 
+    public void setIsChecked(int isChecked) {
+        this.isChecked = isChecked;
+    }
+    public int getIsChecked() {
+        return isChecked;
+    }
 }
