@@ -2,6 +2,7 @@ package cn.aysst.bghcs.service;
 
 import cn.aysst.bghcs.entity.Expert;
 import cn.aysst.bghcs.entity.Image;
+import cn.aysst.bghcs.entity.Statistics;
 import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,15 @@ public interface ExpertService {
 
     Expert login(String expertEmail, String expertPassword);
 
-    String check(String expertEmail, String cropName, String diseaseName, String imageUrl);
+    Map check(String expertEmail, String cropName, String diseaseName, String imageUrl);
 
     Map getCheckedImage(String expertEmail, String imageUrl);
 
     List<Image> getAllImage(int page, int pageNum);
+
+    Expert getExpertInfo(String expertEmail);
+
+    String changeExpertInfo(Expert expert);
+
+    String getStatistics(String expertEmail);
 }
