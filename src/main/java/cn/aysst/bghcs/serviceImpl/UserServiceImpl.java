@@ -7,6 +7,9 @@ import cn.aysst.bghcs.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author lcy
  * @version 2019-12-9
@@ -25,5 +28,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public String checkOpenId(String userOpenId) {
         return userDao.checkOpenId(userOpenId);
+    }
+
+    @Override
+    public List<Map> getCheckInfo(String userOpenId, String imageUrl) {
+        return userDao.getCheckInfo(userOpenId, imageUrl);
     }
 }
