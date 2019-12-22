@@ -3,7 +3,6 @@ package cn.aysst.bghcs.controller;
 import cn.aysst.bghcs.entity.Image;
 import cn.aysst.bghcs.service.ImageService;
 import cn.aysst.bghcs.util.*;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,15 +28,15 @@ public class ImageController {
      * 微信用户上传图片
      * @param files 图片数组
      * @param userOpenId 用户userOpenId
-     * @param request
      * @return
      */
     @RequestMapping("/upload")
     @ResponseBody
-    public Result upload(@RequestParam MultipartFile[] files, String userOpenId, HttpServletRequest request) {
-        String path = request.getContextPath();
-        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
-
+    public Result upload(@RequestParam MultipartFile[] files, String userOpenId) {
+//        String path = request.getContextPath();
+//        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+        String basePath = Config.BASE_PATH;
+        System.out.println(basePath);
         List<Image> list = new ArrayList<Image>();
         for (MultipartFile file: files) {
             try {
