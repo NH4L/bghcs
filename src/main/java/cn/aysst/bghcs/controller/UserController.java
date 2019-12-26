@@ -6,6 +6,7 @@ import cn.aysst.bghcs.service.UserService;
 import cn.aysst.bghcs.util.Result;
 import cn.aysst.bghcs.util.ResultCode;
 import cn.aysst.bghcs.util.ResultUtils;
+import cn.aysst.bghcs.util.WXAppletUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,4 +64,31 @@ public class UserController {
             return ResultUtils.fail(ResultCode.FAIL);
     }
 
+
+    /**
+     * 获取微信小程序 session_key 和 openid
+     * @param code 用户
+     * @return
+     */
+    @RequestMapping("/getopenid")
+    @ResponseBody
+    public String getCheckInfo(@RequestParam String code) {
+        String result = WXAppletUserInfo.getSessionKeyOropenid(code);
+        return result;
+    }
+
+    /**
+     *
+     * 解密用户敏感数据获取用户信息
+     * @param sessionKey    数据进行加密签名的密钥
+     * @param encryptedData 包括敏感数据在内的完整用户信息的加密数据
+     * @param iv            加密算法的初始向量
+     * @return 用户信息数据
+     */
+    @RequestMapping("/getuserinfo")
+    @ResponseBody
+    public String getCheckInfo(@RequestParam String encryptedData, String sessionKey, String iv) {
+        String result = WXAppletUserInfo.getUserInfo(encryptedData, sessionKey, iv);
+        return result;
+    }
 }
