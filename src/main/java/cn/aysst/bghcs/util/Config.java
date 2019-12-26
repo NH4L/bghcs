@@ -12,4 +12,5 @@ public class Config {
     public static final String BASE_PATH = "http://localhost:8080/bghcs";
 //    public static final String BASE_PATH = "http://www.aysst.cn/bghcs";
 
+    public static final String WX_REQUEST_URL = "https://api.weixin.qq.com/sns/jscode2session";
 }
